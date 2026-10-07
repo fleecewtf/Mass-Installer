@@ -2,7 +2,7 @@
 
 # mass installer
 
-Current audit update: **v1.0.15**. Includes app-specific bug fixes, bounded offline regression/performance tests, and shared setup hardening.
+Current audit update: **v1.0.15**. Includes app-specific bug fixes and shared setup hardening.
 
 All Fleece desktop tools use the same installation workflow: download the official ZIP, extract the entire folder, run `Installer.bat`, accept the bundled Terms/Tool License, wait for final checks, then open the folder-local shortcut. Setup installs a private runtime without changing system Python or requiring administrator access. Rerun it to repair or refresh a moved shortcut. Keep the full path at most 72 characters, without percent signs. Architecture support and extra components vary by tool; File Converter remains x64-only.
 
@@ -54,7 +54,6 @@ Run `Installer.bat` again to repair the private components or after moving the c
 - Require reviewed SHA-256 hashes for every Python dependency download during setup and repair.
 - Include complete architecture-specific dependency lock files in the release ZIP.
 - Keep the same UI, dependency versions, WinGet minimum version, public download, and folder-local setup process.
-- Run the existing release gate from the exact canonical ZIP on all supported CI runners.
 
 ## usage
 
@@ -93,10 +92,6 @@ If a trusted WinGet is merely outdated, open a normal PowerShell or Command Prom
 ## license
 
 Copyright 2026 Fleece. This project is source-available, not open source. The bundled [LICENSE](LICENSE) permits downloading, installing, and running an unmodified official release for lawful personal, non-commercial use. Modification, redistribution, sale, rebranding, and derivative versions remain prohibited. Third-party materials retain their own licenses, as listed in [assets/THIRD_PARTY_NOTICES.md](assets/THIRD_PARTY_NOTICES.md).
-
-## offline regression checks
-
-From the extracted source folder, run `.runtime\python\python.exe -I scripts\Test-AppSafety.py`. The suite uses fake WinGet processes, offscreen Qt, and disposable profile/log files. It does not install any catalog app. It checks profile validation and atomic saves, source/version checks, safe command construction, cancellation, streamed UTF-8 output, resource limits, and bounded GUI workloads. Use `--report PATH` to save measurements as JSON. Timing budgets are regression tripwires, not installation-speed guarantees.
 
 ## note
 

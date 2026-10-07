@@ -74,13 +74,6 @@ https://learn.microsoft.com/en-us/windows/msix/app-installer/install-update-app-
 Setup checks WinGet before downloading private Python packages and again
 before success.
 
-OFFLINE REGRESSION CHECKS
-
-Run .runtime\python\python.exe -I scripts\Test-AppSafety.py from this folder.
-The suite uses fake WinGet processes, offscreen Qt, and disposable files; it
-does not install any catalog app. Use --report PATH to save measurements as
-JSON. Timing budgets detect regressions and do not guarantee install speed.
-
 LICENSE
 
 Copyright 2026 Fleece. This project is source-available, not open source. The bundled LICENSE permits downloading, installing, and running an unmodified official release for lawful personal, non-commercial use. Modification, redistribution, sale, rebranding, and derivative versions remain prohibited. Third-party materials retain their own licenses; see assets\THIRD_PARTY_NOTICES.md.
