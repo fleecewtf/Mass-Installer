@@ -71,6 +71,20 @@ Mass Installer uses selected package IDs from its catalog. WinGet resolves those
 
 Installer output is processed in 64 KiB slices to keep window events responsive. Individual output lines retain at most 8,192 characters; result classification retains the latest 300 lines, and the activity view retains 1,500 lines. Session logs are capped at 4 MiB. Managed install/crash logs are normally retained for at most 30 days, 20 files, and 32 MiB in total, with the current session protected. These are application-level limits, not a cap on a publisher installer's memory, disk use, or execution time.
 
+## source code
+
+Both download options use the same [Python app source](Mass%20Installer.pyw). [ReadyLauncher.cs](ReadyLauncher.cs) is the complete C# source of the ready-to-run EXE launcher; it starts that app with the bundled private Python runtime. The EXE does not replace the Python application with native machine code.
+
+The release's [Mass-Installer-v1.0.15-Source.zip](https://github.com/fleecewtf/Mass-Installer/releases/download/v1.0.15/Mass-Installer-v1.0.15-Source.zip) includes both sources, setup/dependency definitions, licenses, and assets, without installed runtimes, user data, or developer tests. The same source is mirrored on GitLab. Fleece's source-available Tool License applies; this is not an open-source license.
+
+To compile the x64 launcher with Windows .NET Framework:
+
+```bat
+"%WINDIR%\Microsoft.NET\Framework64\v4.0.30319\csc.exe" /nologo /target:winexe /platform:x64 /optimize+ /out:"Mass Installer.exe" ReadyLauncher.cs
+```
+
+This builds the launcher only, not Python or its dependencies. Keep the matching app files and private runtime together as described above; `Installer.bat` records the pinned component versions. Adding a Windows icon when compiling is optional. No test or packaging-helper folder is required in the public source tree.
+
 ## built with
 
 - [Windows Package Manager](https://learn.microsoft.com/windows/package-manager/winget/)
